@@ -96,14 +96,15 @@ class PostController extends Controller
      * @param  \App\Models\Posts  $posts
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Posts $posts)
+    public function destroy($id)
     {
         //
+        $posts = Posts::find($id);
         $posts->delete();
 
     return response()->json([
         'status' => true,
-        'message' => "post deleted successfully!",
+        'message' => "post deleted successfully",
     ], 200);
     }
 }
