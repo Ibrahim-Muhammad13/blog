@@ -82,7 +82,7 @@ class PostController extends Controller
     public function update(StorePostsRequest $request,  $id)
     {
         //
-        $posts = Post::find($id);
+        $posts = Posts::find($id);
         $posts->update($request->all());
 
     return response()->json([
