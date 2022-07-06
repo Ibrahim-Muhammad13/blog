@@ -79,9 +79,10 @@ class PostController extends Controller
      * @param  \App\Models\Posts  $posts
      * @return \Illuminate\Http\Response
      */
-    public function update(StorePostsRequest $request, Posts $posts)
+    public function update(StorePostsRequest $request,  $id)
     {
         //
+        $posts = Post::find($id);
         $posts->update($request->all());
 
     return response()->json([
