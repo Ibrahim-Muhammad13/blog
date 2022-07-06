@@ -79,7 +79,7 @@ class PostController extends Controller
      * @param  \App\Models\Posts  $posts
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Posts $posts)
+    public function update(StorePostsRequest $request, Posts $posts)
     {
         //
         $posts->update($request->all());
