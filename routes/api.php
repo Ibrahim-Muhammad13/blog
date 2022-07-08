@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\PostController;
-use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\AuthController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -21,4 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::apiResource('posts', PostController::class);
 
-Route::apiResource('products', ProductController::class);
+Route::post('/register',[AuthController::class,'createUser']);
+Route::post('/login',[AuthController::class,'loginUser']);
