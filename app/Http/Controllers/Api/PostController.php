@@ -6,6 +6,7 @@ use App\Http\Requests\StorePostsRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Posts;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\Types\Null_;
 
 class PostController extends Controller
 {
@@ -39,10 +40,26 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorePostsRequest $request)
+    public function store(Request $request)
     {
         //
-        $posts = Posts::create($request->all());
+        $request->validate([
+            'title'=>'required',
+            'body'=>'required',
+            'image'=>'required|file'
+        ]);
+        // dd($request->file('image'));
+        $filename= "";
+        if($request->file('image')){
+            $filename = $request->file('image')->store('images','public');
+        }else{
+            $filename = Null;
+        }
+        $posts = Posts::create([
+            'title'=>$request->title,
+            'body'=>$request->body,
+            'image'=>$filename
+        ]);
 
     return response()->json([
         'message' => "post saved successfully!",
